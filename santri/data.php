@@ -32,24 +32,30 @@
                                         <tbody>
                                         <?php
                                             $no     = 1;
-                                            $query  = "SELECT * FROM santri ORDER BY id_santri ASC";
+                                            $query  = "SELECT * FROM siswa ORDER BY id_siswa ASC";
                                             $tampil = mysqli_query($koneksi, $query);
-                                            while ($data = mysqli_fetch_assoc($tampil)):
+
+                                            if (! $tampil) {
+                                                echo "<tr><td colspan='6'>Data kosong</td></tr>";
+                                            } else {
+                                                while ($data = mysqli_fetch_assoc($tampil)):
+                                                ?>
+                                                <tr>
+                                                    <td><?= $no++; ?>.</td>
+                                                    <td><?= $data["nama_siswa"]; ?></td>
+                                                    <td><?= $data["jenis_kelamin"]; ?></td>
+                                                    <td><?= $data["asal_sekolah"]; ?></td>
+                                                    <td><?= $data["alamat_siswa"]; ?></td>
+                                                    <td>
+                                                        <a href="edit.php?id=<?=$data['id_siswa']?>" type="button" class="btn btn-sm btn-warning">
+                                                            <i class="fas fa-edit"></i> Edit</a>
+                                                        <a href="hapus.php?id=<?=$data['id_siswa']?>" type="button" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                                                            <i class="fas fa-trash-alt"></i> Hapus</a>
+                                                    </td>
+                                                </tr>
+                                                <?php endwhile;
+                                            }
                                         ?>
-                                        <tr>
-                                            <td><?= $no++; ?>.</td>
-                                            <td><?= $data["nama_santri"]; ?></td>
-                                            <td><?= $data["jenis_kelamin"]; ?></td>
-                                            <td><?= $data["asal_sekolah"]; ?></td>
-                                            <td><?= $data["alamat_santri"]; ?></td>
-                                            <td>
-                                                <a href="edit.php?id=<?=$data['id_santri']?>" type="button" class="btn btn-sm btn-warning">
-                                                    <i class="fas fa-edit"></i> Edit</a>
-                                                <a href="hapus.php?id=<?=$data['id_santri']?>" type="button" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                                                    <i class="fas fa-trash-alt"></i> Hapus</a>
-                                            </td>
-                                        </tr>
-                                        <?php endwhile; ?>
                                         </tbody>
                                     </table>
                                 </div>

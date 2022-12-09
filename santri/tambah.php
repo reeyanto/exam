@@ -15,7 +15,7 @@
                             <div class="card-header bg-primary">
                                 <h3 class="mb-0 text-white">Form Santri</h3>
                             </div>
-                            <form action="" method="post">
+                            <form action="insert.php" method="post">
                                 <div class="card-body">
                                     <div class="form-group">
                                         <h4>
@@ -68,17 +68,7 @@
                                     </div>
                                 </div>
                             </form>
-                            <?php
-                            if(isset($_POST['simpan'])) {
-                                $query  = "INSERT INTO santri (nama_santri, jenis_kelamin, asal_sekolah, alamat_santri)
-                                          VALUES ('$_POST[nama]', '$_POST[jenis]', '$_POST[asal]', '$_POST[alamat]')";
-                                $simpan = mysqli_query($koneksi, $query);
-                                if($simpan) {
-                                    echo "<script>alert('Simpan data sukses!');
-                                    window.location='data.php';</script>";
-                                }
-                            }
-                            ?>
+                            
                         </div>
                     </div>
                 </div>

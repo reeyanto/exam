@@ -41,24 +41,29 @@
                                                       JOIN santri b ON a.id_santri = b.id_santri 
                                                       GROUP BY a.id_santri";
                                             $tampil = mysqli_query($koneksi, $query);
-                                            while ($data = mysqli_fetch_assoc($tampil)) :
-                                            ?>
-                                                <tr>
-                                                    <td><?= $no++; ?>.</td>
-                                                    <td><?= $data["nama_santri"]; ?></td>
-                                                    <?php
-                                                    foreach (explode(",", $data['nilai']) as $i => $val) {
-                                                        echo '<td>' . $val . '</td>';
-                                                    }
-                                                    ?>
-                                                    <td>
-                                                        <a href="edit.php?id=<?= $data['id_santri'] ?>" type="button" class="btn btn-sm btn-warning">
-                                                            <i class="fas fa-edit"></i> Edit</a>
-                                                        <a href="hapus.php?id=<?= $data['id_santri'] ?>" type="button" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                                                            <i class="fas fa-trash-alt"></i> Hapus</a>
-                                                    </td>
-                                                </tr>
-                                            <?php endwhile; ?>
+
+                                            if ( ! $tampil) {
+                                                echo "<tr><td colspan='8'>Data kosong</td></tr>";
+                                            } else {
+                                                while ($data = mysqli_fetch_assoc($tampil)) :
+                                                ?>
+                                                    <tr>
+                                                        <td><?= $no++; ?>.</td>
+                                                        <td><?= $data["nama_santri"]; ?></td>
+                                                        <?php
+                                                        foreach (explode(",", $data['nilai']) as $i => $val) {
+                                                            echo '<td>' . $val . '</td>';
+                                                        }
+                                                        ?>
+                                                        <td>
+                                                            <a href="edit.php?id=<?= $data['id_santri'] ?>" type="button" class="btn btn-sm btn-warning">
+                                                                <i class="fas fa-edit"></i> Edit</a>
+                                                            <a href="hapus.php?id=<?= $data['id_santri'] ?>" type="button" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                                                                <i class="fas fa-trash-alt"></i> Hapus</a>
+                                                        </td>
+                                                    </tr>
+                                                <?php endwhile;
+                                            } ?>
                                         </tbody>
                                     </table>
                                 </div>
