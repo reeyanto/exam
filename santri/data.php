@@ -32,8 +32,8 @@
                                         <tbody>
                                         <?php
                                             $no     = 1;
-                                            $query  = "SELECT * FROM siswa ORDER BY id_siswa ASC";
-                                            $tampil = mysqli_query($koneksi, $query);
+                                            $query  = "SELECT * FROM santri ORDER BY id_santri ASC";
+                                            $tampil = mysqli_query($koneksi, $query) or die(mysqli_error($koneksi));
 
                                             if (! $tampil) {
                                                 echo "<tr><td colspan='6'>Data kosong</td></tr>";
@@ -42,14 +42,14 @@
                                                 ?>
                                                 <tr>
                                                     <td><?= $no++; ?>.</td>
-                                                    <td><?= $data["nama_siswa"]; ?></td>
+                                                    <td><?= $data["nama_santri"]; ?></td>
                                                     <td><?= $data["jenis_kelamin"]; ?></td>
                                                     <td><?= $data["asal_sekolah"]; ?></td>
-                                                    <td><?= $data["alamat_siswa"]; ?></td>
+                                                    <td><?= $data["alamat_santri"]; ?></td>
                                                     <td>
-                                                        <a href="edit.php?id=<?=$data['id_siswa']?>" type="button" class="btn btn-sm btn-warning">
+                                                        <a href="edit.php?id=<?=$data['id_santri']?>" type="button" class="btn btn-sm btn-warning">
                                                             <i class="fas fa-edit"></i> Edit</a>
-                                                        <a href="hapus.php?id=<?=$data['id_siswa']?>" type="button" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                                                        <a href="hapus.php?id=<?=$data['id_santri']?>" type="button" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
                                                             <i class="fas fa-trash-alt"></i> Hapus</a>
                                                     </td>
                                                 </tr>
