@@ -2,9 +2,9 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 09, 2022 at 02:37 AM
--- Server version: 10.4.22-MariaDB
+-- Host: localhost
+-- Generation Time: Dec 09, 2022 at 01:23 PM
+-- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -35,6 +35,17 @@ CREATE TABLE `kriteria` (
   `bobot_kriteria` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `kriteria`
+--
+
+INSERT INTO `kriteria` (`id_kriteria`, `nama_kriteria`, `kode_kriteria`, `jenis_kriteria`, `bobot_kriteria`) VALUES
+(1, 'Kriteria 1', 'K1', 'Cost', 10),
+(2, 'Kriteria 2', 'K2', 'Benefit', 10),
+(3, 'Kriteria 3', 'K3', 'Cost', 20),
+(4, 'Kriteria 4', 'K4', 'Cost', 15),
+(5, 'Kriteria 5', 'K5', 'Cost', 20);
+
 -- --------------------------------------------------------
 
 --
@@ -46,9 +57,20 @@ CREATE TABLE `nilai_normalisasi_alternatif` (
   `id_kriteria` int(5) NOT NULL,
   `id_santri` int(5) NOT NULL,
   `nilai_alternatif` int(5) NOT NULL,
-  `nilai_normalisasi` float NOT NULL,
-  `nilai_normalisasi_terbobot` float NOT NULL
+  `nilai_normalisasi` float DEFAULT NULL,
+  `nilai_normalisasi_terbobot` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `nilai_normalisasi_alternatif`
+--
+
+INSERT INTO `nilai_normalisasi_alternatif` (`id_nilai_normalisasi`, `id_kriteria`, `id_santri`, `nilai_alternatif`, `nilai_normalisasi`, `nilai_normalisasi_terbobot`) VALUES
+(1, 1, 1, 80, NULL, NULL),
+(2, 2, 1, 75, NULL, NULL),
+(3, 3, 1, 80, NULL, NULL),
+(4, 4, 1, 40, NULL, NULL),
+(5, 5, 1, 50, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -68,13 +90,20 @@ CREATE TABLE `nilai_preferensi_alternatif` (
 -- Table structure for table `santri`
 --
 
-CREATE TABLE `siswa` (
-  `id_siswa` int(5) NOT NULL,
-  `nama_siswa` varchar(100) NOT NULL,
+CREATE TABLE `santri` (
+  `id_santri` int(5) NOT NULL,
+  `nama_santri` varchar(100) NOT NULL,
   `jenis_kelamin` varchar(10) NOT NULL,
   `asal_sekolah` varchar(100) NOT NULL,
-  `alamat_siswa` varchar(100) NOT NULL
+  `alamat_santri` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `santri`
+--
+
+INSERT INTO `santri` (`id_santri`, `nama_santri`, `jenis_kelamin`, `asal_sekolah`, `alamat_santri`) VALUES
+(1, 'Santri 1', 'Laki-laki', 'Asal Sekolah 1', 'Alamat 1');
 
 -- --------------------------------------------------------
 
@@ -88,6 +117,13 @@ CREATE TABLE `user` (
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id_user`, `nama`, `username`, `password`) VALUES
+(1, 'test', 'test', '098f6bcd4621d373cade4e832627b4f6');
 
 --
 -- Indexes for dumped tables
@@ -114,8 +150,8 @@ ALTER TABLE `nilai_preferensi_alternatif`
 --
 -- Indexes for table `santri`
 --
-ALTER TABLE `siswa`
-  ADD PRIMARY KEY (`id_siswa`);
+ALTER TABLE `santri`
+  ADD PRIMARY KEY (`id_santri`);
 
 --
 -- Indexes for table `user`
@@ -131,13 +167,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `kriteria`
 --
 ALTER TABLE `kriteria`
-  MODIFY `id_kriteria` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kriteria` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `nilai_normalisasi_alternatif`
 --
 ALTER TABLE `nilai_normalisasi_alternatif`
-  MODIFY `id_nilai_normalisasi` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_nilai_normalisasi` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `nilai_preferensi_alternatif`
@@ -148,14 +184,14 @@ ALTER TABLE `nilai_preferensi_alternatif`
 --
 -- AUTO_INCREMENT for table `santri`
 --
-ALTER TABLE `siswa`
-  MODIFY `id_siswa` int(5) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `santri`
+  MODIFY `id_santri` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
